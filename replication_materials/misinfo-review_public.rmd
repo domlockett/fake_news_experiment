@@ -1,0 +1,438 @@
+---
+title: 'Misinformation Review: ''Fake News'''
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+```{r, message =F}
+library(haven)
+library(estimatr)
+library(dplyr)
+library(margins)
+library(ggplot2)
+library(texreg)
+library(sjPlot)
+june <- read.csv("june.csv")
+oct <- read.csv("oct.csv")
+jan <- read.csv("jan.csv")
+```
+
+Table B1:
+```{r}
+#June, October, January Political Thermometer
+obsJun1 <- lm_robust(pol_therm_media ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (june))
+obsOct1 <- lm_robust(pol_therm_media ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (oct))
+obsJan1 <- lm_robust(pol_therm_media ~ totalfakebinary18_presurvey + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (jan))
+
+#June October January Media Trust
+obsJun2 <- lm_robust(massmedia_trust ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (june))
+obsOct2 <- lm_robust(massmedia_trust ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (oct))
+obsJan2 <- lm_robust(massmedia_trust ~ totalfakebinary18_presurvey + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (jan))
+
+
+
+#Table B1
+screenreg(list(extract.lm_robust(obsJun1, include.ci = F), extract.lm_robust(obsOct1, include.ci = F), extract.lm_robust(obsJan1, include.ci = F), extract.lm_robust(obsJun2, include.ci = F), extract.lm_robust(obsOct2, include.ci = F), extract.lm_robust(obsJan2, include.ci = F)))
+```
+
+
+Table B2:
+
+```{r, echo=T}
+#June October and January Affective Polarization
+obsJun3 <- lm_robust(formula = affect_merged_leanersw1 ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (june))
+obsOct3 <- lm_robust(formula = affect_merged_leanersw1 ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (oct))
+obsJan3 <- lm_robust(formula = affect_merged_leanersw1 ~ totalfakebinary18_presurvey + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (jan))
+
+#Table B2
+screenreg(list(extract.lm_robust(obsJun3, include.ci = F), extract.lm_robust(obsOct3, include.ci = F), extract.lm_robust(obsJan3, include.ci = F)))
+```
+
+Figure 1a:
+
+```{r}
+#Code for Figure 1a and 1b
+ests <- bind_rows(tidy(obsJun1)[2,], tidy(obsOct1)[2,], tidy(obsJan1)[2,], tidy(obsJun2)[2,],
+               tidy(obsOct2)[2,], tidy(obsJan2)[2,], tidy(obsJun3)[2,],
+               tidy(obsOct3)[2,], tidy(obsJan3)[2,])
+
+ests$outcome <- c(rep("Media thermometer", 3), rep("Untrustworthy\n website\n exposure\n (binary)", 3), rep("Affective polarization", 3))
+ests$month <- rep(c("Summer", "Fall", "Winter"), 3)
+ests$month <- as_factor(ests$month)
+ests$month <- relevel(ests$month, ref = "Winter")
+ests$month <- relevel(ests$month, ref = "Fall")
+ests$month <- relevel(ests$month, ref = "Summer")
+names(ests)[10] <- "Study:"
+
+#Figure 1a
+f1a <- ggplot(data = ests[4:6,], aes(y = estimate, x = outcome, shape = `Study:`)) +
+    geom_hline(yintercept = 0, colour = gray(1 / 2), lty = 2) + #facet_wrap(~month) +
+    geom_pointrange(aes(y = estimate,
+                      ymin = conf.low,
+                      ymax = conf.high), position = position_dodge(width = -.4)) +
+                      #scale_color_manual("Month") +
+                      ylim(-.5, .5) +
+                      xlab("") + ylab("Media trust") +
+                      coord_flip() + theme_bw() + theme(legend.position = "bottom",
+                                    axis.text.y = element_blank(),
+                                    axis.ticks.y = element_blank())
+f1a
+```
+
+
+Figure 1b:
+
+```{r}
+#Figure 1b
+names(ests)[10] <- "Study"
+
+f1b <- ggplot(data = ests[c(1:3, 7:9),], aes(y = estimate, x = outcome)) +
+    geom_hline(yintercept = 0, colour = gray(1 / 2), lty = 2) + facet_wrap(~Study) +
+    geom_pointrange(aes(y = estimate,
+                      ymin = conf.low,
+                      ymax = conf.high), position = position_dodge(width = -.2)) +
+                      #scale_color_manual("Randomized exposure to:", values=c("blue", "red")) +
+                      ylim(-20, 20) +
+                      xlab("") + ylab("") +
+                      coord_flip() + theme_bw() + theme(legend.position = "bottom")
+f1b
+
+```
+
+Table B3:
+
+```{r}
+#Table and plot code for Figure 2 ##########################################################################
+#June and October False ProD 
+obsJun5 <- lm_robust(formula = mis_pro_d_false ~ totalfakebinary18_pre * lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (june))
+obsOct5 <- lm_robust(formula = mis_pro_d_false ~ totalfakebinary18_pre * lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (oct))
+
+#June and October False ProR
+obsJun6 <- lm_robust(formula = mis_pro_r_false ~ totalfakebinary18_pre * lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (june))
+obsOct6 <- lm_robust(formula = mis_pro_r_false ~ totalfakebinary18_pre * lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = (oct))
+
+#Table B3
+screenreg(list(extract.lm_robust(obsJun5, include.ci = F), extract.lm_robust(obsOct5, include.ci = F), extract.lm_robust(obsJun6, include.ci = F), extract.lm_robust(obsOct6, include.ci = F)))
+```
+
+Table B4:
+
+```{r}
+#June and October Political Participation W2
+ControlJ <- lm_robust(formula = vote_binary ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = subset(june, june$control_fake == 1))
+ControlO <- lm_robust(formula = vote_binary_w2 ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = subset(oct, oct$control_fake == 1))
+
+Control1 <- lm_robust(formula = vote_combined ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = subset(june, june$control_fake == 1))
+Control3 <- lm_robust(formula = vote_combined_w2 ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = subset(oct, oct$control_fake == 1))
+
+Control2 <- lm_robust(formula = polact_mean ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = subset(june, june$control_fake == 1))
+Control4 <- lm_robust(formula = polact_mean ~ totalfakebinary18_pre + lean_Dem + ideology + polknow + pol_therm_trump + as.factor(agecat) + nonwhite + college, weights = weight, data = subset(oct, oct$control_fake == 1))
+
+#Table B4
+screenreg(list(extract.lm_robust(ControlJ, include.ci = F), extract.lm_robust(ControlO, include.ci = F), extract.lm_robust(Control1, include.ci = F), extract.lm_robust(Control3, include.ci = F), extract.lm_robust(Control2, include.ci = F), extract.lm_robust(Control4, include.ci = F)))
+```
+
+
+Figure 2:
+
+```{r}
+#Code for Figure 2
+ests <- bind_rows(tidy(obsJun5)[2,], tidy(obsOct5)[2,], tidy(obsJun6)[2,], tidy(obsOct6)[2,],
+                  tidy(ControlJ)[2,], tidy(ControlO)[2,], tidy(Control1)[2,],
+                  tidy(Control3)[2,], tidy(Control2)[2,], tidy(Control4)[2,])
+
+ests$outcome <- c(rep("Pro-D misperceptions", 2), rep("Pro-R misperceptions", 2), rep("Vote plan (binary)", 2), rep("Vote plan (combined)", 2),
+                  rep("Political action", 2))
+ests$month <- rep(c("Summer", "Fall"), 5)
+ests$month <- as_factor(ests$month)
+# ests$month <- relevel(ests$month, ref = "Winter")
+ests$month <- relevel(ests$month, ref = "Fall")
+ests$month <- relevel(ests$month, ref = "Summer")
+# names(ests)[10] <- "Month"
+
+outcomes <- unique(ests$outcome)
+ests$outcome <- as_factor(ests$outcome)
+ests$outcome <- relevel(ests$outcome, ref = outcomes[1])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[2])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[3])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[4])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[5])
+
+#Figure 2
+f2 <- ggplot(data = ests, aes(y = estimate, x = outcome)) +
+    geom_hline(yintercept = 0, colour = gray(1 / 2), lty = 2) + facet_wrap(~month) +
+    geom_pointrange(aes(y = estimate,
+                      ymin = conf.low,
+                      ymax = conf.high), position = position_dodge(width = -.2)) +
+                      #scale_color_manual("Month") +
+                      ylim(-1.1, 1.1) +
+                      xlab("") + ylab("Untrustworthy website exposure (binary)") +
+                      coord_flip() + theme_bw() + theme(legend.position = "bottom")
+f2
+```
+
+Table B5:
+
+```{r}
+#Table and plot code for Figure 3 
+
+ests <- NULL
+
+#October effect of false article exposure on claim belief
+XPm3 <- lm_robust(misinform_soros_w2 ~ proD_fake * lean_Dem + proR_fake * lean_Dem + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct)
+XPm4 <- lm_robust(misinform_jamal_w2 ~ proD_fake * lean_Dem + (proR_fake * lean_Dem) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct)
+
+#Table B5
+screenreg(list(extract.lm_robust(XPm3, include.ci = F), extract.lm_robust(XPm4, include.ci = F)),digits =4)
+```
+
+Figure 3:
+
+```{r}
+#Code for Figure 3
+m3 <- margins(XPm3, at = list(lean_Dem = 0:1))
+m4 <- margins(XPm4, at = list(lean_Dem = 0:1))
+
+dat <- as_tibble(summary(m3)[19:22,])
+dat$outcome <- "Soros/caravan belief"
+ests <- rbind(ests, dat)
+dat <- as_tibble(summary(m4)[19:22,])
+dat$outcome <- "Kushner/Khashoggi belief"
+ests <- rbind(ests, dat)
+ests <- ests %>% slice(3:6)
+ests <- ests[seq(dim(ests)[1], 1),]
+
+
+ests$factor[ests$factor == "proD_fake"] <- "False pro-D article"
+ests$factor[ests$factor == "proR_fake"] <- "False pro-R article"
+ests$lean_Dem[ests$lean_Dem == 1] <- "Democrats"
+ests$lean_Dem[ests$lean_Dem == 0] <- "Republicans"
+f3 <- ggplot(data = ests, aes(y = AME, x = outcome, shape = as_factor(factor), color = as_factor(factor))) +
+    geom_hline(yintercept = 0, colour = gray(1 / 2), lty = 2) + facet_wrap(~lean_Dem) +
+    geom_pointrange(aes(y = AME,
+                      ymin = lower,
+                      ymax = upper), position = position_dodge(width = -.2), fatten = 2,
+                  size = .4) +
+                  scale_color_manual("", values = c("blue", "red")) + #Randomized exposure to:
+                  scale_shape_manual("", values = c(19, 15)) +
+                  ylim(-.6, .6) +
+                  xlab("") + ylab("") +
+                  coord_flip() + theme_bw() + theme(legend.position = "bottom",
+                                    legend.text = element_text(size = 20),
+                                    axis.text.y = element_text(size = 20))
+f3
+```
+
+Table B6:
+
+```{r}
+#Table and plot code for Figure 4 
+#June and October Media Trust
+TrustJun <- lm_robust(massmedia_trustw2 ~ (proD_fake) + (proR_fake) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june)
+TrustOct <- lm_robust(massmedia_trustw2 ~ (proD_fake) + (proR_fake) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct)
+
+#June and October Affective Polarization
+APJun <- lm_robust(affect_merged_leaners ~ (proD_fake) + (proR_fake) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june)
+APOct <- lm_robust(affect_merged_leaners ~ (proD_fake) + (proR_fake) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct)
+
+#June and October Media Thermometer
+ThermJun <- lm_robust(pol_therm_media_w2 ~ (proD_fake) + (proR_fake) + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june)
+ThermOct <- lm_robust(pol_therm_media_w2 ~ (proD_fake) + (proR_fake) + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct)
+
+#June and October Binary Vote
+voteJun <- lm_robust(vote_binary ~ proD_fake + proR_fake + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june)
+voteOct <- lm_robust(vote_binary_w2 ~ proD_fake + proR_fake + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct)
+
+#June and October Political Action Average
+polactJun <- lm_robust(polact_mean ~ proD_fake + (proR_fake) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june)
+polactOct <- lm_robust(polact_mean ~ proD_fake + (proR_fake) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct)
+
+
+
+voteFit <- lm_robust(vote_combined ~ proD_fake + proR_fake + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june)
+voteFit1 <- lm_robust(vote_combined_w2 ~ proD_fake + proR_fake + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct)
+
+#Table B6
+
+screenreg(list(extract.lm_robust(ThermJun, include.ci = F), extract.lm_robust(ThermOct, include.ci = F), extract.lm_robust(APJun, include.ci = F), extract.lm_robust(APOct, include.ci = F)))
+```
+
+Table B7:
+
+```{r}
+#Table B7
+
+screenreg(list(extract.lm_robust(TrustJun, include.ci = F), extract.lm_robust(TrustOct, include.ci = F), extract.lm_robust(voteJun, include.ci = F), extract.lm_robust(voteOct, include.ci = F), extract.lm_robust(voteFit, include.ci = F), extract.lm_robust(voteFit1, include.ci = F), extract.lm_robust(polactJun, include.ci = F), extract.lm_robust(polactOct, include.ci = F)))
+
+```
+
+Figure 4a:
+
+```{r}
+#Code for Figure 4
+
+ests <- NULL
+
+dat <- tidy(TrustJun)[c(2, 3),]
+dat$outcome <- "Media trust"
+dat$month <- "Summer"
+ests <- rbind(ests, dat)
+
+dat <- tidy(APJun)[c(2, 3),]
+dat$outcome <- "Affective polarization"
+dat$month <- "Summer"
+ests <- rbind(ests, dat)
+
+dat <- tidy(ThermJun)[c(2, 3),]
+dat$outcome <- "Media thermometer"
+dat$month <- "Summer"
+ests <- rbind(ests, dat)
+
+dat <- tidy(voteJun)[c(2, 3),]
+dat$outcome <- "Vote plan (binary)"
+dat$month <- "Summer"
+ests <- rbind(ests, dat)
+
+dat <- tidy(polactJun)[c(2, 3),]
+dat$outcome <- "Political action"
+dat$month <- "Summer"
+ests <- rbind(ests, dat)
+
+dat <- tidy(TrustOct)[c(2, 3),]
+dat$outcome <- "Media trust"
+dat$month <- "Fall"
+ests <- rbind(ests, dat)
+
+dat <- tidy(APOct)[c(2, 3),]
+dat$outcome <- "Affective polarization"
+dat$month <- "Fall"
+ests <- rbind(ests, dat)
+
+dat <- tidy(ThermOct)[c(2, 3),]
+dat$outcome <- "Media thermometer"
+dat$month <- "Fall"
+ests <- rbind(ests, dat)
+
+dat <- tidy(voteOct)[c(2, 3),]
+dat$outcome <- "Vote plan (binary)"
+dat$month <- "Fall"
+ests <- rbind(ests, dat)
+
+dat <- tidy(polactOct)[c(2, 3),]
+dat$outcome <- "Political action"
+dat$month <- "Fall"
+ests <- rbind(ests, dat)
+
+dat <- tidy(voteFit)[c(2, 3),]
+dat$outcome <- "Vote plan (continuous)"
+dat$month <- "Summer"
+ests <- rbind(ests, dat)
+
+dat <- tidy(voteFit1)[c(2, 3),]
+dat$outcome <- "Vote plan (continuous)"
+dat$month <- "Fall"
+ests <- rbind(ests, dat)
+
+rownames(ests) <- NULL
+
+outcomes <- unique(ests$outcome)
+ests$outcome <- as_factor(ests$outcome)
+ests$outcome <- relevel(ests$outcome, ref = outcomes[1])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[3])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[2])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[4])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[6])
+ests$outcome <- relevel(ests$outcome, ref = outcomes[5])
+
+ests$term[ests$term == "proD_fake"] <- "False pro-D article"
+ests$term[ests$term == "proR_fake"] <- "False pro-R article"
+
+#Figure 4a
+f4a <- ggplot(data = filter(ests, outcome == "Affective polarization" | outcome == "Media thermometer"), aes(y = estimate, x = outcome, color = term, shape = term)) +
+    geom_hline(yintercept = 0, colour = gray(1 / 2), lty = 2) + facet_wrap(~month) +
+    geom_pointrange(aes(y = estimate,
+                      ymin = conf.low,
+                      ymax = conf.high), position = position_dodge(width = -.2)) +
+                      scale_color_manual("", values = c("blue", "red")) + #Randomized exposure to:
+                      scale_shape_manual("", values = c(19, 15)) +
+                      ylim(-10, 10) +
+                      xlab("") + ylab("") +
+                      coord_flip(expand = TRUE, xlim = c(1, 2)) + #coord_fixed(ratio = 1/2) +
+                      theme_bw() + theme(legend.position = "bottom",
+                                    legend.text = element_text(size = 20),
+                                    axis.text.y = element_text(size = 20))
+f4a
+
+```
+
+Figure 4b:
+
+```{r}
+#Figure 4b
+
+f4b <- ggplot(data = filter(ests, outcome != "Affective polarization", outcome != "Media thermometer"), aes(y = estimate, x = outcome, color = term, shape = term)) +
+    geom_hline(yintercept = 0, colour = gray(1 / 2), lty = 2) + facet_wrap(~month) +
+    geom_pointrange(aes(y = estimate,
+                      ymin = conf.low,
+                      ymax = conf.high), position = position_dodge(width = -.2)) +
+                      scale_color_manual("", values = c("blue", "red")) + #Randomized exposure to:
+                      scale_shape_manual("", values = c(19, 15)) +
+                      ylim(-.6, .6) +
+                      ylim(-1.5, 1.5) +
+                      xlab("") + ylab("") +
+                      coord_flip(expand = TRUE, xlim = c(1, 4)) + theme_bw() + theme(legend.position = "bottom",
+                                    legend.text = element_text(size = 20),
+                                    axis.text.y = element_text(size = 20))
+f4b
+```
+
+Table B8:
+
+```{r}
+#Table B8 
+#June and October Media Thermometer w2
+pol_thermFit <- extract.lm_robust(lm_robust(pol_therm_media_w2 ~ (proD_fake * lean_Dem) + (proR_fake * lean_Dem) + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, june), include.ci = F)
+pol_thermFit1 <- extract.lm_robust(lm_robust(pol_therm_media_w2 ~ (proD_fake * lean_Dem) + (proR_fake * lean_Dem) + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, oct), include.ci = F)
+
+#June and October Media Trust w2
+massmediaFit <- extract.lm_robust(lm_robust(massmedia_trustw2 ~ (proD_fake * lean_Dem) + (proR_fake * lean_Dem) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, june), include.ci = F)
+massmediaFit1 <- extract.lm_robust(lm_robust(massmedia_trustw2 ~ (proD_fake * lean_Dem) + (proR_fake * lean_Dem) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, oct), include.ci = F)
+
+screenreg(list(pol_thermFit, pol_thermFit1, massmediaFit, massmediaFit1))
+
+```
+
+Table B9:
+
+```{r}
+#Table B9
+
+#June and October Affective Polarization w2
+
+polarFit <- extract.lm_robust(lm_robust(affect_merged_leaners ~ (proD_fake * lean_Dem) + (proR_fake * lean_Dem) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, june), include.ci = F)
+polarFit1 <- extract.lm_robust(lm_robust(affect_merged_leaners ~ (proD_fake * lean_Dem) + (proR_fake * lean_Dem) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, oct), include.ci = F)
+
+screenreg(list(polarFit, polarFit1))
+
+```
+
+Table B10:
+
+```{r}
+#Table B10
+
+#June and October Political Participation w2
+voteFit0 <- extract.lm_robust(lm_robust(vote_binary ~ proD_fake * lean_Dem + proR_fake * lean_Dem + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june), include.ci = F)
+voteFit01 <- extract.lm_robust(lm_robust(vote_binary_w2 ~ proD_fake * lean_Dem + proR_fake * lean_Dem + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct), include.ci = F)
+
+voteFit <- extract.lm_robust(lm_robust(vote_combined ~ proD_fake * lean_Dem + proR_fake * lean_Dem + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june), include.ci = F)
+voteFit1 <- extract.lm_robust(lm_robust(vote_combined_w2 ~ proD_fake * lean_Dem + proR_fake * lean_Dem + +ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct), include.ci = F)
+
+polactFit <- extract.lm_robust(lm_robust(polact_mean ~ proD_fake * lean_Dem + (proR_fake * lean_Dem) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = june), include.ci = F)
+polactFit1 <- extract.lm_robust(lm_robust(polact_mean ~ proD_fake * lean_Dem + (proR_fake * lean_Dem) + ideology + nonwhite + polknow + as.factor(agecat) + college + pol_therm_trump, data = oct), include.ci = F)
+
+
+screenreg(list(voteFit0, voteFit01, voteFit, voteFit1, polactFit, polactFit1))
+```
