@@ -40,12 +40,13 @@ The focused analyses involve deeper dives into specific aspects of the survey da
 - **Figure 4a: Impact of Fake News Exposure on Political Polarization**
   This plot demonstrates how exposure to fake news correlates with increased political polarization. It illustrates that individuals exposed to more fake news tend to have more polarized political views.
 
-  ![Impact of Fake News Exposure](https://github.com/domlockett/fake_news_experiment/blob/main/images/fn_impact_exposure.png)
+  ![Impact of Fake News Exposure](https://github.com/domlockett/fake_news_experiment/blob/main/images/fn_impact_polarization.png)
   
 - **Figure 4b: Effectiveness of Fact-Checking Interventions**
   This plot shows the effectiveness of fact-checking interventions in reducing the belief in fake news. It indicates that fact-checking can significantly decrease the acceptance of false information.
 
-  ![Effectiveness of Fact-Checking](https://github.com/domlockett/fake_news_experiment/blob/main/images/fn_impact_polarization.png)
+  ![Effectiveness of Fact-Checking](https://github.com/domlockett/fake_news_experiment/blob/main/images/fn_impact_exposure.png)
+  
 
 By leveraging detailed statistical analyses and visualizations, the Fake News Experiment provides valuable insights into the mechanisms by which fake news influences political participation and the effectiveness of various strategies to mitigate these effects.
 
