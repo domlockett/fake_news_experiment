@@ -1,5 +1,11 @@
 # Fake News Experiment
 
+## Overall Aims of the Project
+
+The Fake News Experiment is a comprehensive survey aimed at exploring the impacts of fake news on political participation and identifying effective strategies to prevent misperceptions. This multi-university project assesses how exposure to false information influences people's political attitudes and behaviors.
+
+## Methods Employed
+
 ### - Data Collection and Analysis
 
 #### `replication_materials/misinfo-review_public.rmd`
