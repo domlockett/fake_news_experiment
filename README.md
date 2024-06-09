@@ -27,8 +27,8 @@ The `misinfo-review_public.rmd` file contains the RMarkdown script used for anal
 The focused analyses involve deeper dives into specific aspects of the survey data, highlighting the impact of fake news and the effectiveness of fact-checking interventions.
 
 - **Figure 4a: Impact of Fake News Exposure on Political Polarization**
-  This plot demonstrates how exposure to fake news correlates with increased political polarization. It illustrates that individuals exposed to more fake news tend to have more polarized political views.
-
+  This plot demonstrates how exposure to fake news correlates with increased political polarization. It illustrates that individuals exposed to more fake news tend to have more polarized political views. Where D and R represent the main US political parties.
+  
   ![Impact of Fake News Exposure](https://github.com/domlockett/fake_news_experiment/blob/main/images/fn_impact_polarization.png)
   
 - **Figure 4b: Effectiveness of Fact-Checking Interventions**
