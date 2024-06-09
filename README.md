@@ -1,8 +1,23 @@
 # Fake News Experiment
 
-## Overall Aims of the Project
+## Goals
+The primary goal of this project was to examine the effects of exposure to "fake news" on political beliefs and participation. Specifically, the research aimed to understand how untrustworthy news websites influence political attitudes, beliefs, and behaviors.
 
-The Fake News Experiment is a comprehensive survey aimed at exploring the impacts of fake news on political participation and identifying effective strategies to prevent misperceptions. This multi-university project assesses how exposure to false information influences people's political attitudes and behaviors.
+## Design
+The study employed both observational and experimental methods:
+- **Observational Data:** Collected consensual web browsing histories from three nationally representative samples to identify consumption of untrustworthy websites.
+- **Experimental Data:** Conducted controlled experiments exposing participants to politically biased false stories or neutral stories and surveying their perceptions.
+
+## Implementation
+1. **Data Collection:** 
+   - **Observational:** Collected anonymous web browsing data with informed consent.
+   - **Experimental:** Randomly assigned participants to read biased or neutral stories.
+2. **Survey Panels:** Conducted across three periods (summer, fall, and winter 2018) for diverse samples.
+3. **Analysis:** 
+   - **Misperception Measurement:** Assessed belief in false claims.
+   - **Political Attitudes:** Evaluated trust in media, affective polarization, and political participation intentions.
+
+For more details, refer to the full article [here](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/).
 
 ## Methods Employed
 
