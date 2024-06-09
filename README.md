@@ -31,23 +31,6 @@ The `misinfo-review_public.rmd` file contains the RMarkdown script used for anal
 - **Statistical Analysis:** Various statistical techniques are applied to analyze the impact of fake news on political behavior, including regression analysis and group comparisons. 
 - **Visualization:** The script generates several plots to illustrate the findings, helping to understand the data distribution, relationships between variables, and the overall impact of fake news.
 
-**Detailed Breakdown:**
-- **Data Loading:**
-  - Utilizes `readr` for reading CSV files and `dplyr` for data manipulation.
-  
-- **Data Cleaning:**
-  - Filtering out rows with missing values in key columns.
-
-- **Statistical Analysis:**
-  - Linear regression models are used to assess the relationship between exposure to fake news and political participation.
-
-- **Visualization:**
-  - Histograms and density plots display the distribution of fake news exposure.
-  - Bar charts compare prevalence across demographics.
-  - Time series plots illustrate trends in fake news exposure over time.
-
-Refer to the [publication](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/) for a comprehensive analysis.
-
 ### - Focused Analyses and Plots
 
 The focused analyses involve deeper dives into specific aspects of the survey data, highlighting the impact of fake news and the effectiveness of fact-checking interventions.
