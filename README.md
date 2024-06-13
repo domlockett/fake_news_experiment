@@ -69,13 +69,9 @@ This code conducts a comprehensive analysis of fake news exposure and its effect
 6. **Additional Analysis for Exploratory Questions:**
    - Include exploratory analysis on racial animosity and its interaction with fake news exposure.
 
-For detailed analysis, refer to the file: https://github.com/domlockett/fake_news_experiment/blob/main/FN_Effects/Full_analyses.R
-
-**Conclusion:**
-The code provides a detailed statistical analysis of fake news exposure and its broader implications on political behavior and beliefs. It demonstrates advanced data manipulation, regression modeling, and hypothesis testing skills in R, along with the ability to handle complex survey data and apply various statistical techniques.
-
 ### [Publication](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/) 
-Here's the revised description without using "other relevant measures":
+**Description:**
+The `replication_materials/misinfo-review_public.RMD` is a file and directory I produced so that the entire project could be made publically available on the Harvard Dataverse Database for scholarly replication materials. 
 
 1. **Data Loading and Preparation:**
    - Necessary libraries (e.g., `tidyverse`, `survey`, `lmtest`) are loaded.
