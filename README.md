@@ -15,9 +15,7 @@ For more details, refer to the full article [here](https://misinforeview.hks.har
 ### - Data Collection and Analysis
 
 #### `replication_materials/misinfo-review_public.rmd`
-The `misinfo-review_public.rmd` file contains the RMarkdown script used for analysis. This script details the steps taken to load data, perform statistical analyses, and generate visualizations. The primary methods include:
-
-**Content and Structure:**
+The `misinfo-review_public.rmd` file contains the RMarkdown script used for analysis. This script details the steps taken to load data, perform statistical analyses, and generate visualizations.
 - **Data Loading:** Data from the survey is loaded for analysis using the `readr` and `dplyr` packages.
 - **Statistical Analysis:** Various statistical techniques are applied to analyze the impact of fake news on political behavior, including regression analysis and group comparisons. 
 - **Visualization:** The script generates several plots to illustrate the findings, helping to understand the data distribution, relationships between variables, and the overall impact of fake news.
