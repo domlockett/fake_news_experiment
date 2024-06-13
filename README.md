@@ -25,11 +25,10 @@ The primary goal of this project was to examine the effects of exposure to "fake
 
 My role in this project was to handle the data cleaning, transformation and visualization. The large scale experiment had already been designed and conducted, at which point I was hired to ensure that all pre-registered hypotheses were tested and visualized for co-authors. After providing the scientists with their results, we worked together to identify the most relevant information to include in our publication to the Harvard Misinformation Review.
 
-
-### `FN_Effects/Full_analyses.R`
+### Comprehensive Analysis of Fake News Effects
 
 **Description:**
-This code conducts a comprehensive analysis of fake news exposure and its effects using various statistical models. It uses data from two waves (June and October) and includes numerous hypotheses testing. The analysis is designed to understand the relationship between selective exposure (what websites do participants visit), fake news consumption, political beliefs, and other demographic factors. The code is primarily written in R and makes extensive use of statistical libraries and regression models.
+The [`FN_Effects/Full_analyses.R`](https://github.com/domlockett/fake_news_experiment/blob/main/FN_Effects/Full_analyses.R) code conducts a comprehensive analysis of fake news exposure and its effects using various statistical models. It uses data from two waves (June and October) and includes numerous hypotheses testing. The analysis is designed to understand the relationship between selective exposure (what websites do participants visit), fake news consumption, political beliefs, and other demographic factors. The code is primarily written in R and makes extensive use of statistical libraries and regression models.
 
 **Key Components:**
 
@@ -71,7 +70,7 @@ This code conducts a comprehensive analysis of fake news exposure and its effect
 
 ### [Publication](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/) 
 **Description:**
-The `replication_materials/misinfo-review_public.RMD` is a file and directory I produced so that the entire project could be made publically available on the Harvard Dataverse Database for scholarly replication materials. 
+The [`replication_materials/misinfo-review_public.RMD`](https://github.com/domlockett/fake_news_experiment/blob/main/replication_materials/misinfo-review_public.rmd) is a file and directory I produced so that the entire project could be made publically available on the Harvard Dataverse Database for scholarly replication materials. 
 
 1. **Data Loading and Preparation:**
    - Necessary libraries (e.g., `tidyverse`, `survey`, `lmtest`) are loaded.
