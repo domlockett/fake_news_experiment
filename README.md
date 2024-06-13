@@ -39,7 +39,7 @@ By leveraging detailed statistical analyses and visualizations, the Fake News Ex
 
 ## Acknowledgments
 
-This project is a collaborative effort involving significant contributions from various scholars. The provided files and scripts reflect the extensive work done to understand and address the impacts of fake news on political behavior. The project was created for academic purposes and data folders have been removed to ensure privacy and confidentiality. The was created for the Washington University in Saint Louis Political Science Department, as well as, Exeter and Princeton University.
+This project is a collaborative effort involving significant contributions from various scholars. The provided files and scripts reflect the extensive work done to understand and address the impacts of fake news on political behavior. The project was created for academic purposes and data folders have been removed to ensure privacy and confidentiality. The project was created for the Washington University in Saint Louis Political Science Department, as well as, Exeter and Princeton University.
 
-For further details, you can access the repository [here](https://github.com/domlockett/fake_news_experiment) and refer to the publication [here](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/).
+For further details, you can refer to the publication [here](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/).
 
