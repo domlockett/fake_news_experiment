@@ -3,23 +3,23 @@
 ## Goals
 The primary goal of this project was to examine the effects of exposure to "fake news" on political beliefs and participation. Specifically, the research aimed to understand how untrustworthy news websites influence political attitudes, beliefs, and behaviors.
 
-## Design
+## Data
 
 - **Observational Data:** The study collected web browsing histories from three nationally representative samples, totaling over 7,500 respondents, to track their consumption of untrustworthy websites.
 - **Experimental Data:** Participants were randomly exposed to false news articles to measure the immediate effects on their political attitudes and behaviors.
+
+## Design 
+
+- **Data Collection:** Web browsing data were consensually collected using browser extensions, ensuring a representative sample across different demographics.
+- **Experiment Design:** Participants were shown fabricated news articles designed to appear similar to real news. Their beliefs and intended political actions were measured before and after exposure.
+- **Statistical Analysis:** Advanced statistical techniques, including regression analysis and propensity score matching, were used to isolate the effects of fake news exposure from other variables.
 
 ## Key Findings
 1. **Belief in False Claims:** Exposure to untrustworthy websites increases belief in politically congenial false claims. This effect is more pronounced among individuals who frequently consume such content.
 2. **Political Participation:** The study finds limited evidence that fake news directly affects overall political participation. However, there is a slight increase in the intent to vote among those exposed to fake news.
 3. **Trust in Media:** Consumers of untrustworthy websites exhibit decreased trust in mainstream media, contributing to a more polarized media environment.
 
-## Detailed Analysis
-- **Data Collection:** Web browsing data were consensually collected using browser extensions, ensuring a representative sample across different demographics.
-- **Experiment Design:** Participants were shown fabricated news articles designed to appear similar to real news. Their beliefs and intended political actions were measured before and after exposure.
-- **Statistical Analysis:** Advanced statistical techniques, including regression analysis and propensity score matching, were used to isolate the effects of fake news exposure from other variables.
 
-
-For more details, refer to the full article [here](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/).
 
 ## Methodological contributions
 
@@ -75,48 +75,41 @@ For detailed analysis, refer to the file: https://github.com/domlockett/fake_new
 The code provides a detailed statistical analysis of fake news exposure and its broader implications on political behavior and beliefs. It demonstrates advanced data manipulation, regression modeling, and hypothesis testing skills in R, along with the ability to handle complex survey data and apply various statistical techniques.
 
 ### [Publication](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/) 
-
-Here is a detailed description of the [`misinfo-review_public.rmd`](https://github.com/domlockett/fake_news_experiment/blob/main/replication_materials/misinfo-review_public.rmd) file from the GitHub repository:
+Here's the revised description without using "other relevant measures":
 
 1. **Data Loading and Preparation:**
-   - The file begins by loading necessary libraries, such as `tidyverse`, `survey`, `lmtest`, and others for data manipulation and analysis.
-   - It imports datasets required for the analysis, particularly focusing on misinformation review data.
-   - Variables are processed and transformed into appropriate data types, including categorical and numerical formats.
-   - Creation of new variables to quantify the prevalence of misinformation in the dataset, such as shares of fake news and other relevant measures.
+   - Necessary libraries (e.g., `tidyverse`, `survey`, `lmtest`) are loaded.
+   - Imports datasets focusing on misinformation review data.
+   - Processes variables, converting them to appropriate types (categorical, numerical).
+   - Creates new variables to quantify the prevalence of misinformation, such as shares of fake news and measures of belief accuracy.
 
 2. **Descriptive Statistics:**
-   - Provides summary statistics for the key variables used in the analysis.
-   - Includes tables and visualizations to represent the distribution and central tendencies of these variables.
-   - Examines the demographic breakdown of the sample, including political orientation, age, education, and other relevant factors.
+   - Summary statistics for key variables.
+   - Tables and visualizations for distributions and central tendencies.
+   - Demographic breakdown of the sample, including political orientation, age, education, and other factors.
 
 3. **Hypotheses Testing:**
-   - **H1:** Investigates if exposure to misinformation correlates with the belief in its accuracy.
-     - Utilizes regression models to analyze the relationship, incorporating interaction terms for political alignment and cognitive reflection scores.
-   - **H2:** Tests whether individuals consuming misinformation hold more misperceptions.
-     - Models the perceived accuracy of statements, distinguishing between true and false ones.
-   - **H3:** Examines the impact of misinformation on political behavior and attitudes, such as affective polarization and trust in media.
-     - Includes multiple predictors, such as demographic factors and political leanings.
+   - **H1:** Investigates if exposure to misinformation correlates with belief in its accuracy using regression models with interaction terms for political alignment and cognitive reflection scores.
+   - **H2:** Tests if individuals consuming misinformation hold more misperceptions by modeling the perceived accuracy of true and false statements.
+   - **H3:** Examines the impact of misinformation on political behavior and attitudes, including affective polarization and media trust, with predictors like demographic factors and political leanings.
 
 4. **Kernel Regression Analysis:**
-   - Employs Kernel Regularized Least Squares (KRLS) to explore non-linear relationships in the data.
-   - Applies KRLS models to both the initial and follow-up waves of the survey data.
-   - Provides detailed visualizations of the kernel regression results, illustrating the non-linear effects.
+   - Employs Kernel Regularized Least Squares (KRLS) for non-linear relationships.
+   - Applies KRLS models to initial and follow-up survey waves.
+   - Provides visualizations of kernel regression results, showing non-linear effects.
 
 5. **Interaction Effects and Moderation Analysis:**
-   - Investigates how variables like political interest, knowledge, media trust, and sentiments towards political figures moderate the effects of misinformation.
-   - Analyzes heterogeneous effects based on the congruence of misinformation with the respondent's pre-existing beliefs.
+   - Investigates moderation effects of variables like political interest, knowledge, media trust, and sentiments towards political figures.
+   - Analyzes heterogeneous effects based on misinformation congruence with pre-existing beliefs.
 
 6. **Output and Visualization:**
-   - Uses functions like `screenreg` and `texreg` to produce regression tables.
-   - Generates plots to visually summarize the findings from various analyses, including regression and kernel regression models.
+   - Uses `screenreg` and `texreg` functions for regression tables.
+   - Generates plots to summarize findings from regression and kernel regression models.
 
 7. **Exploratory Analysis:**
-   - Conducts additional analyses on exploratory questions, such as the interplay between racial animosity and misinformation exposure.
-   - Provides insights and preliminary results on these exploratory hypotheses.
+   - Conducts additional analyses on exploratory questions, such as racial animosity and misinformation exposure.
+   - Provides preliminary results on these exploratory hypotheses.
 
-The file meticulously details each step of the data analysis process, ensuring reproducibility and transparency in the methods used to study misinformation effects. 
 
 ## Acknowledgement
-This project is a collaborative effort involving significant contributions from various scholars. The provided files and scripts reflect the extensive work done to understand and address the impacts of fake news on political behavior.
-
-Created for academic purposes, any anonymized data has been removed to ensure privacy and confidentiality. Developed for Washington University in Saint Louis Political Science Department, as well as Exeter and Princeton University. Special thanks to all authors for allowing the sharing of my contributions.
+This project is a collaborative effort involving significant contributions from various scholars. The provided files and scripts reflect the extensive work done to understand and address the impacts of fake news on political behavior. Created for academic purposes, any anonymized data has been removed to ensure privacy and confidentiality. Developed for Washington University in Saint Louis Political Science Department, as well as Exeter and Princeton University. Special thanks to all authors for agreeing to publicize my contributions to the project.
