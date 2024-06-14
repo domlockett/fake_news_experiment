@@ -1,5 +1,7 @@
 # Fake News Experiment
 
+![Fake News Headline](images/fn_headline.png){ width=600 }
+
 ## Goals
 The primary goal of this project was to examine the effects of exposure to "fake news" on political beliefs and participation. Specifically, the research aimed to understand how untrustworthy news websites influence political attitudes, beliefs, and behaviors.
 
