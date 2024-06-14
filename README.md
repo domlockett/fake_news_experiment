@@ -1,5 +1,7 @@
 # Fake News Experiment
 
+<img src="images/fn_headline.png" alt="Fake News Headline" width="600">
+
 ## Goals
 The primary goal of this project was to examine the effects of exposure to "fake news" on political beliefs and participation. Specifically, the research aimed to understand how untrustworthy news websites influence political attitudes, beliefs, and behaviors.
 
@@ -18,7 +20,6 @@ The primary goal of this project was to examine the effects of exposure to "fake
 1. **Belief in False Claims:** Exposure to untrustworthy websites increases belief in politically congenial false claims. This effect is more pronounced among individuals who frequently consume such content.
 2. **Political Participation:** The study finds limited evidence that fake news directly affects overall political participation. However, there is a slight increase in the intent to vote among those exposed to fake news.
 3. **Trust in Media:** Consumers of untrustworthy websites exhibit decreased trust in mainstream media, contributing to a more polarized media environment.
-
 
 
 ## Methodological contributions
@@ -61,50 +62,63 @@ The [`FN_Effects/Full_analyses.R`](https://github.com/domlockett/fake_news_exper
    - Explore potential moderators like political interest, knowledge, trust in media, and feelings toward Trump.
    - Test heterogeneous effects of pro- and counter-attitudinal fake news exposure.
 
-5. **Output and Visualization:**
-   - Display results using screenreg and texreg functions for regression tables.
-   - Generate plots to visualize kernel regression results.
-
-6. **Additional Analysis for Exploratory Questions:**
-   - Include exploratory analysis on racial animosity and its interaction with fake news exposure.
 
 ### [Publication](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/) 
 **Description:**
 The [`replication_materials/misinfo-review_public.RMD`](https://github.com/domlockett/fake_news_experiment/blob/main/replication_materials/misinfo-review_public.rmd) is a file and directory I produced so that the entire project could be made publically available on the Harvard Dataverse Database for scholarly replication materials. 
+It appears that I made a mistake, and section 7 ("Exploratory Analysis") does not exist in the document `misinfo-review_public.RMD`. Here is the corrected description:
+
+### Key Sections:
 
 1. **Data Loading and Preparation:**
-   - Necessary libraries (e.g., `tidyverse`, `survey`, `lmtest`) are loaded.
+   - Loads necessary libraries like `tidyverse`, `survey`, `lmtest`.
    - Imports datasets focusing on misinformation review data.
-   - Processes variables, converting them to appropriate types (categorical, numerical).
-   - Creates new variables to quantify the prevalence of misinformation, such as shares of fake news and measures of belief accuracy.
+   - Converts variables to appropriate types (categorical, numerical).
+   - Creates variables to quantify misinformation prevalence.
 
 2. **Descriptive Statistics:**
-   - Summary statistics for key variables.
-   - Tables and visualizations for distributions and central tendencies.
-   - Demographic breakdown of the sample, including political orientation, age, education, and other factors.
+   - Provides summary statistics, tables, and visualizations.
+   - Breaks down the sample demographically.
 
 3. **Hypotheses Testing:**
-   - **H1:** Investigates if exposure to misinformation correlates with belief in its accuracy using regression models with interaction terms for political alignment and cognitive reflection scores.
-   - **H2:** Tests if individuals consuming misinformation hold more misperceptions by modeling the perceived accuracy of true and false statements.
-   - **H3:** Examines the impact of misinformation on political behavior and attitudes, including affective polarization and media trust, with predictors like demographic factors and political leanings.
+   - **H1:** Tests correlation between exposure to misinformation and belief accuracy.
+   - **H2:** Examines if misinformation consumption leads to more misperceptions.
+   - **H3:** Analyzes the impact on political behavior and attitudes.
 
 4. **Kernel Regression Analysis:**
-   - Employs Kernel Regularized Least Squares (KRLS) for non-linear relationships.
-   - Applies KRLS models to initial and follow-up survey waves.
-   - Provides visualizations of kernel regression results, showing non-linear effects.
+   - Uses Kernel Regularized Least Squares (KRLS) for non-linear relationships.
+   - Visualizes kernel regression results.
 
 5. **Interaction Effects and Moderation Analysis:**
-   - Investigates moderation effects of variables like political interest, knowledge, media trust, and sentiments towards political figures.
-   - Analyzes heterogeneous effects based on misinformation congruence with pre-existing beliefs.
+   - Explores moderation effects of political interest, knowledge, media trust, and sentiments towards political figures.
 
 6. **Output and Visualization:**
-   - Uses `screenreg` and `texreg` functions for regression tables.
-   - Generates plots to summarize findings from regression and kernel regression models.
+   - Uses `screenreg` and `texreg` for regression tables.
+   - Generates advanced plots to summarize findings.
 
-7. **Exploratory Analysis:**
-   - Conducts additional analyses on exploratory questions, such as racial animosity and misinformation exposure.
-   - Provides preliminary results on these exploratory hypotheses.
+Below you will find additional plots I contributed to the project:
 
+<img src="images/fn_impact_polarization.png" alt="4a" width="600">
+
+### Figure 4A
+**Effect of False Article Exposure on Media Trust and Affective Polarization:**
+- **Media Thermometer:** Measures respondents' trust in the media.
+- **Affective Polarization:** Measures the difference in feelings towards the preferred party vs. the opposition party.
+- **Findings:** Exposure to false articles shows varied effects on media trust and affective polarization, with differences observed between fall and summer.
+
+
+<img src="images/fn_impact_exposure.png" alt="4b" width="600">
+
+### Figure 4B
+**Effect of False Article Exposure on Media Trust and Political Participation:**
+- **Media Trust:** Measures trust in the mass media.
+- **Vote Plan (Binary):** Likelihood of voting.
+- **Vote Plan (Continuous):** Scale of vote intention.
+- **Political Action:** Willingness to take political actions.
+- **Findings:** Exposure to false articles influences trust in media, vote intention, and political action, with effects varying by season (fall and summer).
+
+
+You can find the detailed document [here](https://github.com/domlockett/fake_news_experiment/blob/main/replication_materials/misinfo-review_public.rmd).
 
 ## Acknowledgement
 This project is a collaborative effort involving significant contributions from various scholars. The provided files and scripts reflect the extensive work done to understand and address the impacts of fake news on political behavior. Created for academic purposes, any anonymized data has been removed to ensure privacy and confidentiality. Developed for Washington University in Saint Louis Political Science Department, as well as Exeter and Princeton University. Special thanks to all authors for agreeing to publicize my contributions to the project.
