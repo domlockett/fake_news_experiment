@@ -104,7 +104,7 @@ It appears that I made a mistake, and section 7 ("Exploratory Analysis") does no
 
 Below you will find additional plots I contributed to the project:
 
-<img src="images/impact_exposure.png" alt="4a" width="600">
+<img src="images/fn_impact_exposure.png" alt="4a" width="600">
 
 ### Figure 4A
 **Effect of False Article Exposure on Media Trust and Affective Polarization:**
@@ -113,7 +113,7 @@ Below you will find additional plots I contributed to the project:
 - **Findings:** Exposure to false articles shows varied effects on media trust and affective polarization, with differences observed between fall and summer.
 
 
-<img src="images/impact_polarization.png" alt="4b" width="600">
+<img src="images/fn_impact_polarization.png" alt="4b" width="600">
 
 ### Figure 4B
 **Effect of False Article Exposure on Media Trust and Political Participation:**
