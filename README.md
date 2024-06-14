@@ -62,12 +62,6 @@ The [`FN_Effects/Full_analyses.R`](https://github.com/domlockett/fake_news_exper
    - Explore potential moderators like political interest, knowledge, trust in media, and feelings toward Trump.
    - Test heterogeneous effects of pro- and counter-attitudinal fake news exposure.
 
-5. **Output and Visualization:**
-   - Display results using screenreg and texreg functions for regression tables.
-   - Generate plots to visualize kernel regression results.
-
-6. **Additional Analysis for Exploratory Questions:**
-   - Include exploratory analysis on racial animosity and its interaction with fake news exposure.
 
 ### [Publication](https://misinforeview.hks.harvard.edu/article/fake-news-limited-effects-on-political-participation/) 
 **Description:**
